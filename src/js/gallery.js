@@ -19,20 +19,23 @@ function searchFormHandler(e) {
 
   apiServ.resetPage();
   apiServ.searchQuery = inputValue;
-  galleryLoader();
-}
-
-function loadMoreBtnHandler(e) {
-  galleryLoader();
-  setTimeout(scroll, 1200);
-}
-
-function galleryLoader(e) {
   apiServ
     .fetchImages()
     .then(data => {
       makeListItemsMarkup(data);
     })
+    .catch(error => alert('Something went wrong((( Try later!', error));
+}
+
+function loadMoreBtnHandler(e) {
+  // galleryLoader();
+  // setTimeout(scroll, 1200);
+  apiServ
+    .fetchImages()
+    .then(data => {
+      makeListItemsMarkup(data);
+    })
+    .then(scroll)
     .catch(error => alert('Something went wrong((( Try later!', error));
 }
 
